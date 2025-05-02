@@ -25,6 +25,11 @@ process.on('unhandledRejection', e => console.error('❌ Unhandled Rejection:', 
 
 /* ---------- CORS ---------- */
 const PORT = process.env.API_PORT || 3001;
+
+app.listen(PORT, '0.0.0.0', () =>
+  console.log(`✅ API ready on port ${PORT}`)
+);
+
 const allowed = ['https://modmarket.mn', `http://localhost:${PORT}`];
 
 app.use(cors({
