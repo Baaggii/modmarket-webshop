@@ -55,7 +55,7 @@ const pool = mysql.createPool({                      // webshop DB
 });
 
 /* ---------- ROUTES ---------- */
-app.use('/api', (req, res, next) => next());
+app.use('/api', router);
 
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
@@ -105,7 +105,7 @@ app.post('/api/create-admin', (req, res) => {
   res.json({ message: '⚠️ DB тохиргоо дуусаагүй – stub OK' });
 });
 
-app.get('/health', (_req, res) => res.send('OK'));
+app.get('/health', …);
 
 /* ---------- START ---------- */
 const server = app.listen(PORT, '0.0.0.0', () =>
