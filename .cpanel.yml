@@ -1,11 +1,7 @@
----
+# .cpanel.yml  (аль алинд нь төстэй)
 deployment:
   tasks:
-    # (-l) login shell → ~/.bashrc уншина, тэгэхээр npm-ийн venv зам PATH-д орно
-    - /bin/bash -lc 'npm ci --omit=dev'
-
-    # хэрэгцээтэй бол build:
-    # - /bin/bash -lc 'npm run build'
-
-    # Passenger дахин ачаалгах
-    - /bin/bash -lc 'mkdir -p tmp && touch tmp/restart.txt'
+    - /bin/echo "📦  npm install --omit=dev"
+    - /usr/bin/npm install --omit=dev
+    - /bin/echo "🔄  Restart with pm2"
+    - /usr/bin/pm2 reload erp-web-next || pm2 start src/server.js --name erp-web-next
