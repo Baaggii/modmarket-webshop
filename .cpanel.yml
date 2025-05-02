@@ -1,8 +1,8 @@
-# ---  /modmarket-webshop/.cpanel.yml  ---
+# .cpanel.yml  (root дээр)
 version: 1
 deployment:
   tasks:
-    - /usr/bin/echo "▶ npm ci —omit=dev"
+    - /usr/bin/echo "▶ npm ci --omit=dev"
     - /usr/bin/npm ci --omit=dev
-    - /usr/bin/echo "▶ restart passenger"
-    - /usr/bin/touch tmp/restart.txt
+    - /usr/bin/echo "▶ restart Passenger"
+    - /bin/touch tmp/restart.txt
