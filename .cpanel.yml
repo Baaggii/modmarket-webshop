@@ -1,8 +1,7 @@
-version: 1
 deployment:
   tasks:
-    # 1) prod-хоор npm install
-    - /usr/bin/npm ci --omit=dev
-
-    # 2) deploy бүрт Passenger-ийг рестартлана
-    - /usr/bin/touch tmp/restart.txt
+    - export NODE_OPTIONS="--openssl-legacy-provider"
+    - /usr/local/bin/npm install --omit=dev
+    - /usr/local/bin/npm run build
+    - /usr/local/bin/pm2 reload erp-web || \
+      /usr/local/bin/pm2 serve build 3000 -f --spa --name erp-web
