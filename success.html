@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Захиалга амжилттай | Мод Маркет</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="index.html" class="logo"><img src="images/logo/logo.png" alt="Мод Маркет" class="logo-img"></a>
+    </nav>
+
+    <main class="container success-page">
+        <div class="success-content">
+            <div class="success-header">
+                <h1>🎉 Захиалга амжилттай хийгдлээ!</h1>
+                <p class="order-id">Захиалгын дугаар: <strong id="orderId"></strong></p>
+            </div>
+            
+            <div class="order-details">
+                <h2>Захиалгын мэдээлэл</h2>
+                <div id="orderSummary"></div>
+                <div id="orderTotal" class="order-total"></div>
+            </div>
+
+            <div class="next-steps">
+                <h3>Дараагийн алхам</h3>
+                <ul id="notificationList">
+                    <li>Таны захиалгыг баталгаажуулсан имэйл илгээгдэх болно</li>
+                    <li>Бараа хүргэлтийн явцыг имэйлээр мэдэгдэх болно</li>
+                    <li>Асуулт байвал 7777-7777 дугаарт холбогдоно уу</li>
+                </ul>
+                <script>
+                    const email = sessionStorage.getItem('customerEmail');
+                    const wantsEmails = sessionStorage.getItem('wantsEmails');
+                    const list = document.getElementById('notificationList');
+                    
+                    if (email && wantsEmails === 'true') {
+                        const li = document.createElement('li');
+                        li.textContent = `Захиалгын мэдээлэл ${email} хаяг руу илгээгдлээ`;
+                        list.appendChild(li);
+                    }
+                </script>
+            </div>
+
+            <div class="success-actions">
+                <a href="index.html" class="continue-shopping">Үргэлжлүүлэн худалдан авах</a>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

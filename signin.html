@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нэвтрэх | Мод Маркет</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="index.html" class="logo"><img src="images/logo/logo.png" alt="Мод Маркет" class="logo-img"></a>
+    </nav>
+
+    <main class="container auth-container">
+        <div class="auth-form">
+            <h2>Нэвтрэх</h2>
+            <div class="social-login">
+                <button class="social-btn google" onclick="handleGoogleSignIn()">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" width="20">
+                    <span>Google-ээр нэвтрэх</span>
+                </button>
+                <button class="social-btn facebook" onclick="handleFacebookSignIn()">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/480px-Facebook_Logo_%282019%29.png" alt="Facebook" width="20">
+                    Facebook-ээр нэвтрэх
+                </button>
+            </div>
+            <div style="text-align: center; margin: 15px 0;">эсвэл</div>
+            <form id="signinForm" onsubmit="return handleSignIn(event)">
+                <div class="form-group">
+                    <label for="email">Имэйл</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Нууц үг</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit">Нэвтрэх</button>
+            </form>
+            <p>Бүртгэлгүй юу? <a href="signup.html">Бүртгүүлэх</a></p>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

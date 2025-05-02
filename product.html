@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Бүтээгдэхүүний дэлгэрэнгүй | Мод Маркет</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <button onclick="goBack()" class="back-btn">← Буцах</button>
+        <a href="index.html" class="logo"><img src="images/logo/logo.png" alt="Мод Маркет" class="logo-img"></a>
+        <div class="nav-right">
+            <div class="cart" id="cartBtn" onclick="toggleCart(event)">
+                <span class="cart-count">0</span>
+                <span>Сагс</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="cart-dropdown">
+        <div class="cart-header">
+            <h3>Таны Сагс</h3>
+        </div>
+        <div id="cartItems" class="cart-items"></div>
+        <div class="cart-footer">
+            <div id="cartTotal" class="cart-total"></div>
+            <button class="primary" onclick="checkout()">Төлбөр хийх</button>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="product-detail">
+            <div class="product-images">
+                <img id="mainImage" src="" alt="Product Image" class="main-product-image">
+                <div class="thumbnail-gallery" id="thumbnailGallery"></div>
+            </div>
+            <div class="product-info-detail">
+                <h1 id="productTitle"></h1>
+                <div class="price">
+                    <span id="productPrice" class="current-price"></span>
+                </div>
+                <div id="productRating" class="rating"></div>
+                <p id="productDescription"></p>
+                <button onclick="addToCartFromDetail()" class="add-to-cart-btn">Сагсанд хийх</button>
+            </div>
+        </div>
+    </main>
+
+    <dialog id="cartModal">
+        <article>
+            <header>
+                <h3>Таны Сагс</h3>
+            </header>
+            <div id="cartItems"></div>
+            <footer>
+                <div id="cartTotal"></div>
+                <button id="checkoutBtn" class="primary" onclick="checkout()">Төлбөр хийх</button>
+                <button id="closeCartBtn" onclick="closeCart()">Хаах</button>
+            </footer>
+        </article>
+    </dialog>
+
+    <script src="script.js"></script>
+</body>
+</html>

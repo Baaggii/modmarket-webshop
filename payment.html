@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Төлбөр төлөх | Мод Маркет</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <button onclick="goBack()" class="back-btn">← Буцах</button>
+        <a href="index.html" class="logo"><img src="images/logo/logo.png" alt="Мод Маркет" class="logo-img"></a>
+    </nav>
+
+    <main class="container">
+        <div class="payment-page">
+            <h2>Төлбөр төлөх</h2>
+            <div id="orderSummary" class="order-summary"></div>
+            <div class="email-collection">
+                <div class="form-group">
+                    <input type="email" id="customerEmail" placeholder="Имэйл хаяг" required>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="wantsEmails" checked>
+                        Захиалгын мэдээллийг имэйлээр авах
+                    </label>
+                </div>
+            </div>
+            <div class="payment-methods">
+                <button onclick="processPayment('QPay')">QPay</button>
+                <button onclick="processPayment('SocialPay')">SocialPay</button>
+                <button onclick="processPayment('MostMoney')">MostMoney</button>
+                <button onclick="processPayment('Golomt')">Golomt Bank</button>
+                <button onclick="showCardForm()">Картаар төлөх</button>
+            </div>
+            <div id="cardForm" style="display: none;">
+                <input type="text" placeholder="Картын дугаар" maxlength="16" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                <div class="card-details">
+                    <input type="text" placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this)" onkeydown="handleExpiryBackspace(event, this)">
+                    <input type="text" placeholder="CVV" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                </div>
+                <button onclick="processPayment('Card')" class="primary">Төлөх</button>
+                <button onclick="cancelCardPayment()" class="secondary">Буцах</button>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

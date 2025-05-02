@@ -1,0 +1,1 @@
+User requested a simple, elegant, and easy-to-use online store for selling handcrafted Mongolian wooden furniture. The website includes product listings, payment integration (QPay, SocialPay, MostMoney, Golomt Bank), and contact details.

@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Хувийн мэдээлэл | Мод Маркет</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <button class="back-btn" onclick="goBack()">← Буцах</button>
+        <a href="index.html" class="logo">
+            <img src="images/logo/logo.png" alt="Мод Маркет" class="logo-img">
+        </a>
+    </nav>
+
+    <main class="container">
+        <div class="auth-container">
+            <div class="auth-form">
+                <h2>Хувийн мэдээлэл</h2>
+                <div id="accountInfo">
+                    <div class="form-group">
+                        <label>Нэр</label>
+                        <p id="displayName" class="info-text"></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Имэйл</label>
+                        <p id="displayEmail" class="info-text"></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Утас</label>
+                        <p id="displayPhone" class="info-text"></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Хаяг</label>
+                        <p id="displayAddress" class="info-text"></p>
+                    </div>
+                    <button onclick="toggleEdit()" class="edit-btn">Засах</button>
+                </div>
+                <form id="accountEditForm" style="display: none;" onsubmit="handleAccountUpdate(event)">
+                    <div class="form-group">
+                        <label for="name">Нэр</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Имэйл</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Утас</label>
+                        <input type="tel" id="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Хаяг</label>
+                        <textarea id="address" rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit">Хадгалах</button>
+                        <button type="button" onclick="toggleEdit()" class="cancel-btn">Цуцлах</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

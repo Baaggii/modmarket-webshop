@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Мод Маркет | Online Shopping</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="side-nav">
+        <h3>Ангилалууд</h3>
+        <div class="menu-categories">
+            <button onclick="filterProducts('all'); toggleMenu(); scrollToProducts()">Бүх ангилал</button>
+            <button onclick="filterProducts('sale'); toggleMenu(); scrollToProducts()">Хямдрал</button>
+            <button onclick="filterProducts('kitchen'); toggleMenu(); scrollToProducts()">Гал тогоо</button>
+            <button onclick="filterProducts('living'); toggleMenu(); scrollToProducts()">Том өрөө</button>
+            <button onclick="filterProducts('kids'); toggleMenu(); scrollToProducts()">Хүүхдийн өрөө</button>
+            <button onclick="filterProducts('bedroom'); toggleMenu(); scrollToProducts()">Унтлагын өрөө</button>
+            <button onclick="filterProducts('storage'); toggleMenu(); scrollToProducts()">Агуулах</button>
+            <button onclick="filterProducts('outdoor'); toggleMenu(); scrollToProducts()">Гадна бүтээгдэхүүн</button>
+        </div>
+        <div class="menu-footer">
+            <a href="#">Холбоо барих</a>
+            <a href="#">Тусламж</a>
+        </div>
+    </div>
+<div class="overlay"></div>
+
+<nav class="top-nav">
+        <a href="index.html" class="logo"><img src="images/logo/logo.png" alt="Мод Маркет" class="logo-img"></a>
+        <div class="nav-right">
+            <div class="account" id="accountSection">
+                <a href="signin.html" class="account-link">
+                    <span>Сайн уу, Нэвтрэх</span>
+                    <strong>Хаяг & Жагсаалт</strong>
+                </a>
+            </div>
+            <div class="cart" id="cartBtn" onclick="toggleCart(event)">
+                <span class="cart-count">0</span>
+                <span>Сагс</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="department-bar">
+        <button onclick="filterProducts('all')" data-category="all" class="active">Бүх ангилал</button>
+        <button onclick="filterProducts('chairs')" data-category="chairs">Сандал</button>
+        <button onclick="filterProducts('tables')" data-category="tables">Ширээ</button>
+        <button onclick="filterProducts('beds')" data-category="beds">Ор</button>
+        <button onclick="filterProducts('cabinets')" data-category="cabinets">Шүүгээ</button>
+        <button class="menu-btn">☰</button>
+    </div>
+
+    <div class="search-container">
+        <button class="find-btn" onclick="toggleSearch()">🔍</button>
+        <div class="search-bar">
+            <input type="search" id="searchInput" placeholder="Хайх..." oninput="searchProducts(this.value)">
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </div>
+
+    <div class="banner-slider">
+        <div class="slides"></div>
+        <button class="slide-nav prev">❮</button>
+        <button class="slide-nav next">❯</button>
+    </div>
+
+    <div class="main-content">
+
+        <main class="container">
+        <section class="deals">
+            <h2>Өдрийн онцлох</h2>
+            <div id="productGrid" class="product-grid">
+                <article class="product-card">
+                    <div class="discount-badge">-20%</div>
+                    <img src="https://via.placeholder.com/300" alt="Модон сандал">
+                    <div class="product-info">
+                        <h3>Уламжлалт Модон Сандал</h3>
+                        <div class="price">
+                            <span class="current-price">₮299,000</span>
+                            <span class="original-price">₮349,000</span>
+                        </div>
+                        <div class="rating">★★★★☆ (24)</div>
+                        <button onclick="addToCart('Уламжлалт Модон Сандал', 299000)">Сагсанд хийх</button>
+                    </div>
+                </article>
+                <article class="product-card">
+                    <img src="https://via.placeholder.com/300" alt="Модон ширээ">
+                    <div class="product-info">
+                        <h3>Гар Урлалын Ширээ</h3>
+                        <div class="price">
+                            <span class="current-price">₮459,000</span>
+                        </div>
+                        <div class="rating">★★★★★ (42)</div>
+                        <button onclick="addToCart('Гар Урлалын Ширээ', 459000)">Сагсанд хийх</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="recommendations">
+            <h2>Танд санал болгох</h2>
+            <div class="product-grid">
+                <article class="product-card">
+                    <a href="product.html?id=3" class="product-link">
+                        <img src="https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?w=300" alt="Номын тавиур">
+                        <div class="product-info">
+                            <h3>Номын тавиур</h3>
+                            <div class="price">
+                                <span class="current-price">₮199,000</span>
+                            </div>
+                            <div class="rating">★★★★☆ (18)</div>
+                        </div>
+                    </a>
+                    <button onclick="addToCart(3)">Сагсанд хийх</button>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <div class="cart-dropdown">
+        <div class="cart-header">
+            <h3>Таны Сагс</h3>
+        </div>
+        <div id="cartItems" class="cart-items"></div>
+        <div class="cart-footer">
+            <div id="cartTotal" class="cart-total"></div>
+            <button class="primary" onclick="checkout()">Төлбөр хийх</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Биднийг мэдэх</h4>
+                    <a href="#">Бидний тухай</a>
+                    <a href="#">Ажлын байр</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Төлбөр</h4>
+                    <a href="#">QPay</a>
+                    <a href="#">Карт</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Тусламж</h4>
+                    <a href="#">Түгээмэл асуултууд</a>
+                    <a href="#">Холбоо барих</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <small>© 2024 Мод Маркет</small>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

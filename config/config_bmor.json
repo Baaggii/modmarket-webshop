@@ -1,0 +1,75 @@
+{
+  "transaction_type": "bmor",
+  "transaction_name": "Бараа материалын орлого",
+  "form_sheet": "BurtgelSheet",
+  "field_order": [
+    "bmtr_cid",
+    "bmtr_tid",
+    "bmtr_pmid",
+    "bmtr_acc",
+    "bmtr_sub",
+    "bmtr_prod",
+    "bmtr_annot",
+    "bmtr_date",
+    "bmtr_sellerid",
+    "bmtr_empid",
+    "bmtr_orderedp",
+    "bmtr_orderid",
+    "bmtr_orderdid",
+    "bmtr_branchid",
+    "bmtr_consumerid",
+    "bmtr_coupcode",
+    "bmtr_return",
+    "bmtr_frombranchid",
+    "bmtr_AvUg",
+    "bmtr_Dupercent"
+  ],
+  "field_config": {
+    "bmtr_ap": {
+      "label": "Үнийн дүн",
+      "type": "calculated",
+      "formula": "bmtr_sub * bmtr_up"
+    },
+    "bmtr_branchid": {
+      "label": "Салбар",
+      "type": "dropdown",
+      "source": "branches",
+      "required": true
+    },
+    "bmtr_date": {
+      "label": "Гүйлгээний огноо",
+      "type": "date",
+      "required": true
+    }
+  },
+  "constants": {
+    "bmtr_type": "bmor",
+    "bmtr_status": "pending"
+  },
+  "print_layout": [
+    "bmtr_num",
+    "bmtr_date",
+    "bmtr_ap",
+    "bmtr_branchname"
+  ],
+  "picture_filename_field": "bmtr_num",
+  "email": {
+    "branch_lookup_field": "bmtr_branchid",
+    "recipients": {
+      "101": "branch101@example.com",
+      "102": "branch102@example.com"
+    },
+    "fields_to_send": [
+      "bmtr_num",
+      "bmtr_date",
+      "bmtr_ap"
+    ]
+  },
+  "code_mappings": {
+    "bmtr_pmid": "xmkod",
+    "bmtr_tkkod": "xmkod-TK",
+    "bmtr_prodcode": "Bkod",
+    "bmtr_groupcode": "Bkodprice",
+    "bmtr_price": "BkodSellPrice"
+  }
+}
