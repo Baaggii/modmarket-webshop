@@ -1,4 +1,3 @@
----
 deployment:
   tasks:
     # (-l) login shell → ~/.bashrc уншина, тэгэхээр npm-ийн venv зам PATH-д орно
