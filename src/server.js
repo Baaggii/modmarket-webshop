@@ -54,15 +54,6 @@ const pool = mysql.createPool({                      // webshop DB
   connectionLimit: 10,
 });
 
-const erpPool = mysql.createPool({                   // ERP DB
-  host: process.env.ERP_DB_HOST,
-  user: process.env.ERP_DB_USER,
-  password: process.env.ERP_DB_PASSWORD,
-  database: process.env.ERP_DB_NAME,
-  waitForConnections: true,
-  connectionLimit: 10,
-});
-
 /* ---------- ROUTES ---------- */
 app.use('/api', (req, _res, next) => next());
 
