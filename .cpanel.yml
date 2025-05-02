@@ -1,8 +1,5 @@
-# .cpanel.yml  (root дээр)
 version: 1
 deployment:
   tasks:
-    - /usr/bin/echo "▶ npm ci --omit=dev"
     - /usr/bin/npm ci --omit=dev
-    - /usr/bin/echo "▶ restart Passenger"
     - /bin/touch tmp/restart.txt
