@@ -57,7 +57,7 @@ const pool = mysql.createPool({                      // webshop DB
 /* ---------- ROUTES ---------- */
 app.use('/api', router);
 
-app.post('/api/login', async (req, res) => {
+app.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
     const [[user]] = await erpPool.query(
@@ -77,12 +77,12 @@ app.post('/api/login', async (req, res) => {
 }
 });
 
-app.post('/api/logout', (_req, res) => {
+app.post('/logout', (_req, res) => {
   res.clearCookie('token');
   res.json({ message: 'Амжилттай гарлаа' });
 });
 
-//app.post('/api/create-admin', async (req, res) => {
+//app.post('/create-admin', async (req, res) => {
 // const { email, password, name, company = 'ModMarket ХХК', id = null } = req.body;
 //  try {
 //    const [[dup]] = await erpPool.query('SELECT id FROM users WHERE email = ?', [email]);
@@ -100,12 +100,12 @@ app.post('/api/logout', (_req, res) => {
 //  }
 //});
 
-app.post('/api/create-admin', (req, res) => {
+app.post('/create-admin', (req, res) => {
   console.log('🔧 Stub create-admin payload:', req.body);
   res.json({ message: '⚠️ DB тохиргоо дуусаагүй – stub OK' });
 });
 
-app.get('/health', …);
+app.get("/api/health", (_req,res)=>res.send("OK"))
 
 /* ---------- START ---------- */
 const server = app.listen(PORT, '0.0.0.0', () =>
