@@ -17,7 +17,7 @@ if (!express.__routePatched) {                        // nodemon сэргээх�
     return origRoute.call(this, p);
   };
   express.__routePatched = true;
-}
+};
 
 /* ---------- GLOBAL HANDLERS ---------- */
 process.on('uncaughtException',  e => console.error('❌ Uncaught Exception:',  e));
@@ -55,7 +55,7 @@ const pool = mysql.createPool({                      // webshop DB
 });
 
 /* ---------- ROUTES ---------- */
-app.use('/api', router);
+//app.use('/api', router);
 
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
@@ -105,7 +105,7 @@ app.post('/create-admin', (req, res) => {
   res.json({ message: '⚠️ DB тохиргоо дуусаагүй – stub OK' });
 });
 
-app.get("/api/health", (_req,res)=>res.send("OK"))
+app.get("/health", (_req,res)=>res.send("OK"))
 
 /* ---------- START ---------- */
 const server = app.listen(PORT, '0.0.0.0', () =>
