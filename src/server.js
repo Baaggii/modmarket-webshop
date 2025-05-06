@@ -26,8 +26,8 @@ process.on('unhandledRejection', e => console.error('❌ Unhandled Rejection:', 
 /* ---------- CORS ---------- */
 const PORT = process.env.PORT || 3001;
 
-app.listen(PORT, '0.0.0.0', () =>
-  console.log(`✅ API ready on port ${PORT}`)
+app.listen(PORT, () =>
+  console.log(`✅ API ready on http://localhost:${PORT}`)
 );
 
 const allowed = ['https://modmarket.mn', `http://localhost:${PORT}`];
@@ -37,7 +37,8 @@ app.use(cors({
                                                : cb(new Error('CORS blocked')))
 }));
 
-app.use(express.json());
+//app.use(express.json());
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 /* ---------- (optional) serve React build ---------- */
 // const build = path.join(__dirname, 'build');
