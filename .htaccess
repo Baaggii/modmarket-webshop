@@ -6,6 +6,13 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^erp/?$ /erp/index.html [L]
 
+# ERP frontend
+RewriteRule ^erp/(.*)$ http://127.0.0.1:3001/erp/$1 [P,L]
+RewriteRule ^erp$ http://127.0.0.1:3001/erp/ [P,L]
+
+# ERP API
+RewriteRule ^api/(.*)$ http://127.0.0.1:3001/api/$1 [P,L]
+
 <FilesMatch "^\.env">
   Order allow,deny
   Deny from all
