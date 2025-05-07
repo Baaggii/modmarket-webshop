@@ -1,10 +1,10 @@
 RewriteEngine On
 
 # React SPA fallback
+RewriteRule ^erp(/.*)?$ /erp/index.html [L]
 RewriteCond %{REQUEST_URI} ^/erp
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^erp(/.*)?$ /erp/index.html [L]
 
 # API proxy → pm2
 RewriteRule ^api/(.*)$ http://127.0.0.1:3001/api/$1 [P,L]
