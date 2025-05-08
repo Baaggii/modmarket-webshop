@@ -2,7 +2,6 @@ RewriteEngine On
 
 # React SPA fallback
 RewriteRule ^erp(/.*)?$ /erp/index.html [L]
-RewriteCond %{REQUEST_URI} ^/erp
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
