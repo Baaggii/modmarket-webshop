@@ -7,8 +7,8 @@ RewriteRule ^erp(/.*)?$ /erp/index.html [L]
 RewriteRule ^api/(.*)$ http://127.0.0.1:3001/api/$1 [P,L]
 
 # ERP frontend → pm2 port 3001
-RewriteRule ^erp/(.*)$ http://127.0.0.1:3001/erp/$1 [P,L]
-RewriteRule ^erp$ http://127.0.0.1:3001/erp/ [P,L]
+#RewriteRule ^erp/(.*)$ http://127.0.0.1:3001/erp/$1 [P,L]
+#RewriteRule ^erp$ http://127.0.0.1:3001/erp/ [P,L]
 
 # ERP API
 RewriteRule ^api/(.*)$ http://127.0.0.1:3001/api/$1 [P,L]
