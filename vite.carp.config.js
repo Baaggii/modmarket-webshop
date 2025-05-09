@@ -4,13 +4,14 @@ const react = require('@vitejs/plugin-react')
 module.exports = defineConfig({
   base: '/carpenters/',
   plugins: [react()],
-  root: 'src/carpenters',
+  root: 'src/carpenters/src/client',
   build: {
-    outDir: '../../../public_html/carpenters',
+    outDir: '../../../../public_html/carpenters',
     emptyOutDir: true
   }
 })
 
+```js
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { HashRouter, Routes, Route } from 'react-router-dom'
