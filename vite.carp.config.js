@@ -10,10 +10,6 @@ module.exports = defineConfig({
     emptyOutDir: true
   }
 })
-
----
-
-## 📄 src/client/main.jsx (HashRouter)
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom/client'
