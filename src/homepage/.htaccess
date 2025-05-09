@@ -1,7 +1,6 @@
 RewriteEngine On
 
 # SPA fallback — `/erp/login` → `/erp/index.html`
-RewriteCond %{REQUEST_URI} ^/erp
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^erp(/.*)?$ /erp/index.html [L]
