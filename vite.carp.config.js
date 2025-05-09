@@ -6,7 +6,7 @@ module.exports = defineConfig({
   plugins: [react()],
   root: 'src/carpenters/src/client',
   build: {
-    outDir: '../../../../../public_html/carpenters',
+    outDir: '../../../../../../public_html/carpenters',
     emptyOutDir: true
   }
 })
