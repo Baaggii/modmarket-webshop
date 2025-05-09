@@ -1,18 +1,11 @@
 RewriteEngine On
 
-# React SPA fallback
+# SPA fallback — `/erp/login` → `/erp/index.html`
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^erp(/.*)?$ /erp/index.html [L]
 
-# API proxy → pm2
-RewriteRule ^api/(.*)$ http://127.0.0.1:3001/api/$1 [P,L]
-
-# ERP frontend → pm2 port 3001
-RewriteRule ^erp/(.*)$ http://127.0.0.1:3001/erp/$1 [P,L]
-RewriteRule ^erp$ http://127.0.0.1:3001/erp/ [P,L]
-
-# ERP API
+# API proxy
 RewriteRule ^api/(.*)$ http://127.0.0.1:3001/api/$1 [P,L]
 
 <FilesMatch "^\\.env">
