@@ -1,48 +1,39 @@
-import express from 'express'
-const router = express.Router()
-import db from '../lib/db.js'
+import jwt from 'jsonwebtoken'
+import bcrypt from 'bcrypt'
 
-// GET all products for a carpenter
-router.get('/:username/products', async (req, res) => {
-  const { username } = req.params
-  try {
-    const [products] = await db.execute(
-      'SELECT id, name, description FROM products WHERE carpenter = ?',
-      [username]
-    )
-    res.json(products)
-  } catch (err) {
-    res.status(500).json({ error: 'DB error', detail: err.message })
-  }
-})
+const JWT_SECRET = process.env.JWT_SECRET || 'devsecret'
 
-// GET single product detail
-router.get('/:username/product/:productId', async (req, res) => {
-  const { username, productId } = req.params
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body
   try {
     const [rows] = await db.execute(
-      'SELECT * FROM products WHERE id = ? AND carpenter = ?',
-      [productId, username]
+      'SELECT * FROM carpenters WHERE email = ?',
+      [email]
     )
-    if (!rows.length) return res.status(404).json({ error: 'Not found' })
-    res.json(rows[0])
+    if (!rows.length) return res.status(401).json({ error: 'Invalid credentials' })
+
+    const user = rows[0]
+    const match = await bcrypt.compare(password, user.password)
+    if (!match) return res.status(401).json({ error: 'Invalid credentials' })
+
+    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' })
+    res.cookie('token', token, { httpOnly: true }).json({ token })
   } catch (err) {
-    res.status(500).json({ error: 'DB error', detail: err.message })
+    res.status(500).json({ error: 'Login failed', detail: err.message })
   }
 })
 
-// POST register a new carpenter
-router.post('/register', async (req, res) => {
-  const { username, full_name, phone, email, bio } = req.body
+router.get('/me', (req, res) => {
+  const token = req.cookies.token
+  if (!token) return res.status(401).json({ error: 'No token' })
   try {
-    await db.execute(
-      'INSERT INTO carpenters (username, full_name, phone, email, bio) VALUES (?, ?, ?, ?, ?)',
-      [username, full_name, phone, email, bio]
-    )
-    res.json({ status: 'ok', message: 'Carpenter registered' })
-  } catch (err) {
-    res.status(500).json({ error: 'Registration failed', detail: err.message })
+    const user = jwt.verify(token, JWT_SECRET)
+    res.json(user)
+  } catch {
+    res.status(401).json({ error: 'Invalid token' })
   }
 })
 
-export default router
+router.post('/logout', (req, res) => {
+  res.clearCookie('token').json({ success: true })
+})
