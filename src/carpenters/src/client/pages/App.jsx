@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Routes,
   Route
 } from 'react-router-dom'
@@ -14,7 +14,7 @@ import ProductDetail from './ProductDetail'
 
 export default function App() {
   return (
-    <Router basename="/carpenters">
+    <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

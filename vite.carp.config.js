@@ -1,13 +1,17 @@
-const { defineConfig } = require('vite')
-const react = require('@vitejs/plugin-react')
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
-module.exports = defineConfig({
+export default defineConfig({
   base: '/carpenters/',
   plugins: [react()],
   root: 'src/carpenters/src/client',
   build: {
     outDir: '../../../../../../public_html/carpenters',
     emptyOutDir: true,
-    manifest: true
+    target: 'esnext',
+    manifest: true,
+    minify: false,
+    sourcemap: false,
+    brotliSize: false
   }
 })
