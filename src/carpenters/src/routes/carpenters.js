@@ -44,6 +44,9 @@ router.post('/register', async (req, res) => {
   }
 })
 
+console.log('Request body:', req.body);
+console.log('Error:', err.message);
+
 
 // module.exports ашиглана
 module.exports = router
