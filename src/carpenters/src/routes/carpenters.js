@@ -1,39 +1,68 @@
-import jwt from 'jsonwebtoken'
-import bcrypt from 'bcrypt'
+import express from 'express'
+const router = express.Router()
+import db from '../lib/db.js'
+import multer from 'multer'
+import path from 'path'
 
-const JWT_SECRET = process.env.JWT_SECRET || 'devsecret'
+// GET all products for a carpenter
+router.get('/:username/products', async (req, res) => {
+  const { username } = req.params
+  try {
+    const [products] = await db.execute(
+      'SELECT id, name, description FROM carp_products WHERE carpenter = ?',
+      [username]
+    )
+    res.json(products)
+  } catch (err) {
+    res.status(500).json({ error: 'DB error', detail: err.message })
+  }
+})
 
-router.post('/login', async (req, res) => {
-  const { email, password } = req.body
+// GET single product detail
+router.get('/:username/product/:productId', async (req, res) => {
+  const { username, productId } = req.params
   try {
     const [rows] = await db.execute(
-      'SELECT * FROM carpenters WHERE email = ?',
-      [email]
+      'SELECT * FROM carp_products WHERE id = ? AND carpenter = ?',
+      [productId, username]
     )
-    if (!rows.length) return res.status(401).json({ error: 'Invalid credentials' })
-
-    const user = rows[0]
-    const match = await bcrypt.compare(password, user.password)
-    if (!match) return res.status(401).json({ error: 'Invalid credentials' })
-
-    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' })
-    res.cookie('token', token, { httpOnly: true }).json({ token })
+    if (!rows.length) return res.status(404).json({ error: 'Not found' })
+    res.json(rows[0])
   } catch (err) {
-    res.status(500).json({ error: 'Login failed', detail: err.message })
+    res.status(500).json({ error: 'DB error', detail: err.message })
   }
 })
 
-router.get('/me', (req, res) => {
-  const token = req.cookies.token
-  if (!token) return res.status(401).json({ error: 'No token' })
+// POST register a new carpenter
+router.post('/register', async (req, res) => {
+  const { username, full_name, phone, email, bio } = req.body
   try {
-    const user = jwt.verify(token, JWT_SECRET)
-    res.json(user)
-  } catch {
-    res.status(401).json({ error: 'Invalid token' })
+    await db.execute(
+      'INSERT INTO carp_accounts (username, full_name, phone, email, bio) VALUES (?, ?, ?, ?, ?)',
+      [username, full_name, phone, email, bio]
+    )
+    res.json({ status: 'ok', message: 'Carpenter registered' })
+  } catch (err) {
+    res.status(500).json({ error: 'Registration failed', detail: err.message })
   }
 })
 
-router.post('/logout', (req, res) => {
-  res.clearCookie('token').json({ success: true })
+
+const storage = multer.diskStorage({
+  destination: './uploads/',
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname)
+    const filename = Date.now() + ext
+    cb(null, filename)
+  }
 })
+
+const upload = multer({ storage })
+
+// POST upload image for product
+router.post('/:username/upload', upload.single('image'), (req, res) => {
+  const url = `/uploads/${req.file.filename}`
+  res.json({ image_url: url })
+})
+
+export default router
