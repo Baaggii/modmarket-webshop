@@ -1,35 +1,43 @@
 const express = require('express')
-const router = express.Router()
-const db = require('../lib/db.js') // CommonJS-ээр холбох
+const cors = require('cors')
+const mysql = require('mysql2/promise')
+const dotenv = require('dotenv')
+const cookieParser = require('cookie-parser')
+dotenv.config()
 
-// GET all products for a carpenter
-router.get('/:username/products', async (req, res) => {
-  const { username } = req.params
-  try {
-    const [products] = await db.execute(
-      'SELECT id, name, description FROM carp_products WHERE carpenter = ?',
-      [username]
-    )
-    res.json(products)
-  } catch (err) {
-    res.status(500).json({ error: 'DB error', detail: err.message })
+const carpentersRouter = require('./src/routes/carpenters.js')  // << нэмнэ
+
+const app = express()
+app.use(cors())
+app.use(express.json())
+app.use(cookieParser())
+app.use('/api/carpenter', carpentersRouter)
+app.use(cookieParser())
+
+const pool = mysql.createPool({
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASS || '',
+  database: process.env.DB_NAME || 'erp',
+  waitForConnections: true,
+  connectionLimit: 10
+})
+
+app.get('/api/health', (req,res)=>res.json({status:'ok'}))
+
+// 👇 Carpenters Routes холбох
+app.use('/api/carpenter', carpentersRouter)
+
+app.post('/api/:table', async (req,res)=>{
+  const {table} = req.params
+  const data = req.body
+  try{
+    const [result] = await pool.query(`INSERT INTO ?? SET ?`, [table, data])
+    res.json({id: result.insertId})
+  }catch(err){
+    res.status(500).json({error: err.message})
   }
 })
 
-// GET single product detail
-router.get('/:username/product/:productId', async (req, res) => {
-  const { username, productId } = req.params
-  try {
-    const [rows] = await db.execute(
-      'SELECT * FROM carp_products WHERE id = ? AND carpenter = ?',
-      [productId, username]
-    )
-    if (!rows.length) return res.status(404).json({ error: 'Not found' })
-    res.json(rows[0])
-  } catch (err) {
-    res.status(500).json({ error: 'DB error', detail: err.message })
-  }
-})
-
-// module.exports ашиглана
-module.exports = router
+const port = process.env.PORT || 3001
+app.listen(port, ()=>console.log(`ERP backend running on ${port}`))

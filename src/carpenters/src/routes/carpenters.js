@@ -1,8 +1,6 @@
-import express from 'express'
+const express = require('express')
 const router = express.Router()
-import db from '../lib/db.js'
-import multer from 'multer'
-import path from 'path'
+const db = require('../lib/db.js') // CommonJS-ээр холбох
 
 // GET all products for a carpenter
 router.get('/:username/products', async (req, res) => {
@@ -33,7 +31,6 @@ router.get('/:username/product/:productId', async (req, res) => {
   }
 })
 
-// POST register a new carpenter
 router.post('/register', async (req, res) => {
   const { username, full_name, phone, email, bio } = req.body
   try {
@@ -48,21 +45,5 @@ router.post('/register', async (req, res) => {
 })
 
 
-const storage = multer.diskStorage({
-  destination: './uploads/',
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname)
-    const filename = Date.now() + ext
-    cb(null, filename)
-  }
-})
-
-const upload = multer({ storage })
-
-// POST upload image for product
-router.post('/:username/upload', upload.single('image'), (req, res) => {
-  const url = `/uploads/${req.file.filename}`
-  res.json({ image_url: url })
-})
-
-export default router
+// module.exports ашиглана
+module.exports = router
