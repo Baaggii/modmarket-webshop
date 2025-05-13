@@ -3,6 +3,8 @@ const cors = require('cors')
 const mysql = require('mysql2/promise')
 const dotenv = require('dotenv')
 const cookieParser = require('cookie-parser')
+const bcrypt = require('bcrypt'); // эсвэл import bcrypt from 'bcrypt'
+
 dotenv.config()
 
 const carpentersRouter = require('./src/routes/carpenters.js')  // << нэмнэ
