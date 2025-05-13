@@ -25,9 +25,6 @@ const pool = mysql.createPool({
 
 app.get('/api/health', (req,res)=>res.json({status:'ok'}))
 
-// 👇 Carpenters Routes холбох
-app.use('/api/carpenter', carpentersRouter)
-
 app.post('/api/:table', async (req,res)=>{
   const {table} = req.params
   const data = req.body
