@@ -1,14 +1,12 @@
 RewriteEngine On
 
-# SPA fallback — `/erp/login` → `/erp/index.html`
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^erp(/.*)?$ /erp/index.html [L]
+RewriteRule ^.*$ /index.html [L]
 
-# API proxy
 RewriteRule ^api/(.*)$ http://127.0.0.1:3001/api/$1 [P,L]
 
-<FilesMatch "^\\.env">
+<FilesMatch "^\.env">
   Order allow,deny
   Deny from all
 </FilesMatch>
