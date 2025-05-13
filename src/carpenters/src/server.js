@@ -2,11 +2,15 @@ const express = require('express')
 const cors = require('cors')
 const mysql = require('mysql2/promise')
 const dotenv = require('dotenv')
+const cookieParser = require('cookie-parser')
 dotenv.config()
+
+const carpentersRouter = require('./src/routes/carpenters.js')  // << нэмнэ
 
 const app = express()
 app.use(cors())
 app.use(express.json())
+app.use(cookieParser())
 
 const cookieParser = require('cookie-parser')
 app.use(cookieParser())
@@ -21,6 +25,9 @@ const pool = mysql.createPool({
 })
 
 app.get('/api/health', (req,res)=>res.json({status:'ok'}))
+
+// 👇 Carpenters Routes холбох
+app.use('/api/carpenter', carpentersRouter)
 
 app.post('/api/:table', async (req,res)=>{
   const {table} = req.params
