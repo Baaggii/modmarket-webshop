@@ -7,6 +7,7 @@ module.exports = defineConfig({
   root: 'src/carpenters/src/client',
   build: {
     outDir: '../../../../../../public_html/carpenters',
-    emptyOutDir: true
+    emptyOutDir: true,
+    manifest: true
   }
 })
