@@ -5,12 +5,12 @@ import {
   Route
 } from 'react-router-dom'
 
-import Login from './Login'
-import Register from './Register'
-import Dashboard from './Dashboard'
-import CarpenterPage from './CarpenterPage'
-import ProductList from './ProductList'
-import ProductDetail from './ProductDetail'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Dashboard from './pages/Dashboard'
+import CarpenterPage from './pages/CarpenterPage'
+import ProductList from './pages/ProductList'
+import ProductDetail from './pages/ProductDetail'
 
 export default function App() {
   return (
