@@ -16,13 +16,13 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/:username" element={<CarpenterPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path=":username" element={<CarpenterPage />} />
-        <Route path=":username/products" element={<ProductList />} />
-        <Route path=":username/product/:productId" element={<ProductDetail />} />
-      </Routes>
+        <Route path="/:username/products" element={<ProductList />} />
+        <Route path="/:username/product/:productId" element={<ProductDetail />} />
+        </Routes>
     </Router>
   )
 }
