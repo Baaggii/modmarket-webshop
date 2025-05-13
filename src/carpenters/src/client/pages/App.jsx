@@ -14,15 +14,15 @@ import ProductDetail from './ProductDetail'
 
 export default function App() {
   return (
-    <Router>
+    <Router basename="/carpenters">
       <Routes>
-        <Route path="/:username" element={<CarpenterPage />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path=":username" element={<CarpenterPage />} />
+        <Route path="/:username" element={<CarpenterPage />} />
         <Route path="/:username/products" element={<ProductList />} />
         <Route path="/:username/product/:productId" element={<ProductDetail />} />
-        </Routes>
+      </Routes>
     </Router>
   )
 }
