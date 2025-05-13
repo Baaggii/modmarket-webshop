@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+import bcrypt from 'bcrypt';
 const db = require('../lib/db.js') // CommonJS-ээр холбох
 
 // GET all products for a carpenter
@@ -32,17 +33,18 @@ router.get('/:username/product/:productId', async (req, res) => {
 })
 
 router.post('/register', async (req, res) => {
-  const { username, full_name, phone, email, bio } = req.body
+  const { username, full_name, phone, email, bio, password } = req.body;
   try {
+    const hashedPassword = await bcrypt.hash(password, 10);
     await db.execute(
-      'INSERT INTO carp_accounts (username, full_name, phone, email, bio) VALUES (?, ?, ?, ?, ?)',
-      [username, full_name, phone, email, bio]
-    )
-    res.json({ status: 'ok', message: 'Carpenter registered' })
+      'INSERT INTO carp_accounts (username, full_name, phone, email, bio, password) VALUES (?, ?, ?, ?, ?, ?)',
+      [username, full_name, phone, email, bio, hashedPassword]
+    );
+    res.json({ status: 'ok', message: 'Carpenter registered' });
   } catch (err) {
-    res.status(500).json({ error: 'Registration failed', detail: err.message })
+    res.status(500).json({ error: 'Registration failed', detail: err.message });
   }
-})
+});
 
 console.log('Request body:', req.body);
 console.log('Error:', err.message);
