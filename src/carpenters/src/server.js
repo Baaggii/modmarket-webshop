@@ -3,17 +3,13 @@ const cors = require('cors')
 const mysql = require('mysql2/promise')
 const dotenv = require('dotenv')
 const cookieParser = require('cookie-parser')
-const bcrypt = require('bcrypt'); // эсвэл import bcrypt from 'bcrypt'
-
 dotenv.config()
 
-const carpentersRouter = require('./src/routes/carpenters.js')  // << нэмнэ
+const carpentersRouter = require('./src/routes/carpenters.js')
 
 const app = express()
 app.use(cors())
 app.use(express.json())
-app.use(cookieParser())
-app.use('/api/carpenter', carpentersRouter)
 app.use(cookieParser())
 
 const pool = mysql.createPool({
@@ -27,16 +23,7 @@ const pool = mysql.createPool({
 
 app.get('/api/health', (req,res)=>res.json({status:'ok'}))
 
-app.post('/api/:table', async (req,res)=>{
-  const {table} = req.params
-  const data = req.body
-  try{
-    const [result] = await pool.query(`INSERT INTO ?? SET ?`, [table, data])
-    res.json({id: result.insertId})
-  }catch(err){
-    res.status(500).json({error: err.message})
-  }
-})
+app.use('/api/carpenter', carpentersRouter)
 
 const port = process.env.PORT || 3001
 app.listen(port, ()=>console.log(`ERP backend running on ${port}`))
