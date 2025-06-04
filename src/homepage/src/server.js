@@ -61,7 +61,7 @@ const pool = mysql.createPool({                      // webshop DB
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
-    const [[user]] = await erpPool.query(
+    const [[user]] = await pool.query(
       'SELECT * FROM users WHERE email = ? OR id = ?',
       [email, email]
     );
