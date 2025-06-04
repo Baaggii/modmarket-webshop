@@ -1,7 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const bcrypt = require('bcrypt');
-const db = require('../lib/db.js'); // CommonJS-ээр холбох
+const express = require('express')
+const router = express.Router()
+import bcrypt from 'bcrypt';
+const db = require('../lib/db.js') // CommonJS-ээр холбох
 
 // GET all products for a carpenter
 router.get('/:username/products', async (req, res) => {
@@ -46,5 +46,9 @@ router.post('/register', async (req, res) => {
   }
 });
 
+console.log('Request body:', req.body);
+console.log('Error:', err.message);
+
+
 // module.exports ашиглана
-module.exports = router;
+module.exports = router
