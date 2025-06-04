@@ -11,9 +11,9 @@ This repository contains the webshop application built with Node.js, Express and
    ```
 3. Build the front‑end:
    ```bash
-   npm run build
+   ./deploy.sh
    ```
-   The static site is generated into `public_html`.
+   This builds both the homepage and carpenter UIs into `public_html`.
 4. Start the API server locally:
    ```bash
    node server.js
