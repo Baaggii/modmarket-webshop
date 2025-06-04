@@ -25,5 +25,5 @@ app.get('/api/health', (req,res)=>res.json({status:'ok'}))
 
 app.use('/api/carpenter', carpentersRouter)
 
-const port = process.env.PORT || 3001
-app.listen(port, ()=>console.log(`ERP backend running on ${port}`))
+const port = process.env.PORT || 3001;
+app.listen(port, () => console.log(`ERP backend running on ${port}`));
