@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "Уламжлалт модон сандал",
+    "image": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=300",
+    "price": 299000,
+    "rating": 4,
+    "reviews": 24,
+    "category": "chairs",
+    "description": "Энгийн боловч бат бөх модон сандал"
+  },
+  {
+    "id": 2,
+    "name": "Гар урлалын ширээ",
+    "image": "https://images.unsplash.com/photo-1598300053091-bc172ad3e9e9?w=300",
+    "price": 459000,
+    "rating": 5,
+    "reviews": 42,
+    "category": "tables",
+    "description": "Гар урласан тав тухтай ширээ"
+  },
+  {
+    "id": 3,
+    "name": "Номын тавиур",
+    "image": "https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?w=300",
+    "price": 199000,
+    "rating": 4,
+    "reviews": 18,
+    "category": "cabinets",
+    "description": "Энгийн номын тавиур"
+  },
+  {
+    "id": 4,
+    "name": "Эвхдэг буйдан",
+    "image": "https://images.unsplash.com/photo-1585559606988-0d574549939f?w=300",
+    "price": 899000,
+    "rating": 4,
+    "reviews": 30,
+    "category": "sofas",
+    "description": "Ор болдог зөөлөн буйдан"
+  },
+  {
+    "id": 5,
+    "name": "Хүүхдийн ор",
+    "image": "https://images.unsplash.com/photo-1585421514287-27d7a4a0ae1b?w=300",
+    "price": 399000,
+    "rating": 5,
+    "reviews": 12,
+    "category": "beds",
+    "description": "Хүүхдийн модон ор"
+  }
+]
